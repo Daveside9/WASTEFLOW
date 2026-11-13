@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WasteFlow — Pitch Deck</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Inter, sans-serif; background: #040F18; color: #fff; }
+  .deck { width: 100%; }
+  .slide {
+    width: 100%; min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 60px 48px; position: relative; border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .slide-inner { max-width: 900px; width: 100%; }
+  .teal   { color: #13C2A8; }
+  .amber  { color: #F59E0B; }
+  .red    { color: #EF4444; }
+  .green  { color: #22C55E; }
+  .muted  { color: rgba(255,255,255,0.45); }
+  .slide-num {
+    position: absolute; top: 24px; right: 32px;
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    color: rgba(255,255,255,0.2); text-transform: uppercase;
+  }
+  .cover { background: linear-gradient(135deg, #040F18 0%, #0B2233 60%, #071C2C 100%); text-align: center; }
+  .cover .logo { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 40px; }
+  .logo-icon { width: 48px; height: 48px; border-radius: 14px; background: #0FA68E; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+  .logo-text { font-size: 26px; font-weight: 800; letter-spacing: -.02em; }
+  .cover h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 20px; }
+  .cover .sub { font-size: 1.15rem; color: rgba(255,255,255,0.5); max-width: 600px; margin: 0 auto 40px; line-height: 1.6; }
+  .badge { display: inline-block; padding: 8px 20px; border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; border: 1.5px solid #0FA68E; color: #13C2A8; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #13C2A8; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .section-label::before { content: ''; display: inline-block; width: 24px; height: 2px; background: #13C2A8; border-radius: 2px; }
+  h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -.025em; line-height: 1.15; margin-bottom: 12px; }
+  h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+  p  { font-size: .95rem; line-height: 1.7; color: rgba(255,255,255,0.6); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 32px; }
+  .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; }
+  .card.accent { background: rgba(15,166,142,0.08); border-color: rgba(15,166,142,0.25); }
+  .card.danger { background: rgba(239,68,68,0.07); border-color: rgba(239,68,68,0.25); }
+  .card.amber  { background: rgba(245,158,11,0.07); border-color: rgba(245,158,11,0.25); }
+  .card-icon { font-size: 28px; margin-bottom: 12px; }
+  .card h3   { font-size: .95rem; }
+  .card p    { font-size: .85rem; margin-top: 6px; }
+  .stat-val { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: #13C2A8; letter-spacing: -.03em; line-height: 1; }
+  .stat-label { font-size: .8rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+  .flow { display: flex; align-items: center; gap: 0; margin-top: 32px; flex-wrap: wrap; }
+  .flow-step { flex: 1; min-width: 120px; text-align: center; position: relative; }
+  .flow-step .step-num { width: 44px; height: 44px; border-radius: 50%; background: rgba(15,166,142,0.15); border: 2px solid #0FA68E; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #13C2A8; font-size: 1rem; margin: 0 auto 10px; }
+  .flow-step .step-label { font-size: .8rem; font-weight: 700; color: #fff; }
+  .flow-step .step-desc { font-size: .72rem; color: rgba(255,255,255,0.35); margin-top: 4px; }
+  .flow-arrow { color: rgba(255,255,255,0.15); font-size: 20px; padding: 0 4px; margin-top: -20px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: .85rem; }
+  th { text-align: left; padding: 10px 16px; background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.5); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { color: #13C2A8; font-weight: 600; }
+  .role-card { border-radius: 16px; padding: 24px; }
+  .role-seller  { background: rgba(15,166,142,0.07); border: 1px solid rgba(15,166,142,0.2); }
+  .role-weigher { background: rgba(99,102,241,0.07); border: 1px solid rgba(99,102,241,0.2); }
+  .role-buyer   { background: rgba(34,197,94,0.07);  border: 1px solid rgba(34,197,94,0.2); }
+  .role-label   { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: .72rem; font-weight: 600; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.5); margin: 3px 2px; }
+  .tag.live { background: rgba(15,166,142,0.15); color: #13C2A8; }
+  .cta { background: linear-gradient(135deg, #071C2C, #0B2233); text-align: center; }
+  .cta h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+  .cta-btns { display: flex; gap: 16px; justify-content: center; margin-top: 36px; flex-wrap: wrap; }
+  .btn-primary { padding: 14px 36px; border-radius: 12px; background: #0FA68E; color: #fff; font-weight: 700; font-size: .95rem; border: none; cursor: pointer; }
+  .btn-outline { padding: 14px 36px; border-radius: 12px; background: transparent; color: #13C2A8; font-weight: 700; font-size: .95rem; border: 1.5px solid #0FA68E; }
+  .divider { width: 48px; height: 3px; background: #0FA68E; border-radius: 2px; margin: 16px 0 24px; }
+  .tech-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 100px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); font-size: .8rem; color: rgba(255,255,255,0.6); margin: 4px; }
+  @media (max-width: 640px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .flow-arrow { transform: rotate(90deg); margin: 0 0 0 22px; }
+    .slide { padding: 48px 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- SLIDE 1: Cover -->
+  <div class="slide cover">
+    <div class="slide-inner">
+      <div class="logo">
+        <div class="logo-icon">🌊</div>
+        <span class="logo-text">Waste<span class="teal">Flow</span></span>
+      </div>
+      <h1>Turning Marine Waste Into<br/><span class="teal">Community Value</span></h1>
+      <p class="sub">An AI-assisted marine waste management and blue circular economy platform for Nigerian coastal communities.</p>
+      <span class="badge">NIMASA-BEAP · Track 6 · Blue Circular Economy</span>
+    </div>
+    <div class="slide-num">01 / 12</div>
+  </div>
+
+  <!-- SLIDE 2: The Problem -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="section-label">The Problem</div>
+      <h2>Nigeria's Waterways Are Drowning in Waste</h2>
+      <div class="divider"></div>
+      <p>Marine plastic and water hyacinth are choking Nigeria's 853 km coastline and thousands of km of inland waterways — disrupting navigation, fishing, and coastal livelihoods.</p>
+      <div class="grid-3">
+        <div class="card danger"><div class="card-icon">🚫</div><h3>No Visibility</h3><p>Communities can't see where waste is accumulating until it's a crisis</p></div>
+        <div class="card danger"><div class="card-icon">📭</div><h3>No Coordination</h3><p>Collectors, recyclers, and hubs operate in silos with no shared platform</p></div>
+        <div class="card danger"><div class="card-icon">🔓</div><h3>No Trust Layer</h3><p>Unverified weight claims mean buyers and sellers can't agree on value</p></div>
+        <div class="card danger"><div class="card-icon">💸</div><h3>No Incentives</h3><p>Community participation dries up without clear, transparent rewards</p></div>
+        <div class="card danger"><div class="card-icon">🔗</div><h3>No Market Link</h3><p>Collected material rarely reaches recyclers — the circular loop is broken</p></div>
+        <div class="card danger"><div class="card-icon">📊</div><h3>No Data</h3><p>Without records, hotspots repeat and government response is reactive</p></div>
+      </div>
+    </div>
+    <div class="slide-num">02 / 12</div>
+  </div>
+
+  <!-- SLIDE 3: The Solution -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="section-label">Our Solution</div>
+      <h2>One Platform. The Full Loop.</h2>
+      <div class="divider"></div>
+      <p>WasteFlow closes the gap between AI-detected waste, verified collection, and circular reuse — with transparent incentives at every step.</p>
+      <div class="flow">
+        <div class="flow-step"><div class="step-num">1</div><div class="step-label">AI Detects</div><div class="step-desc">Live weather → risk map</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="step-num">2</div><div class="step-label">Seller Lists</div><div class="step-desc">Posts waste from alert</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="step-num">3</div><div class="step-label">Weigher Verifies</div><div class="step-desc">Weighs & confirms value</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="step-num">4</div><div class="step-label">Buyer Purchases</div><div class="step-desc">Verified listing only</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="step-num">5</div><div class="step-label">Credits Earned</div><div class="step-desc">Blue Credits rewarded</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><div class="step-num">6</div><div class="step-label">Material Reused</div><div class="step-desc">Circular marketplace</div></div>
+      </div>
+    </div>
+    <div class="slide-num">03 / 12</div>
+  </div>
+
+  <!-- SLIDE 4: NIMASA Alignment -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="section-label">NIMASA-BEAP Track 6 Alignment</div>
+      <h2>Built for the Blue Circular Economy</h2>
+      <div class="divider"></div>
+      <table>
+        <thead><tr><th>BEAP Objective</th><th>WasteFlow Response</th></tr></thead>
+        <tbody>
+          <tr><td>Reduce marine pollution</td><td style="color:rgba(255,255,255,0.65)">AI-guided collection targeting the highest-risk Nigerian waterways in real time</td></tr>
+          <tr><td>Circular economy principles</td><td style="color:rgba(255,255,255,0.65)">Waste-to-resource marketplace connecting collectors directly to recycling companies</td></tr>
+          <tr><td>Community economic opportunities</td><td style="color:rgba(255,255,255,0.65)">Blue Credits + direct payment for verified waste — sustaining participation</td></tr>
+          <tr><td>Maritime data &amp; evidence</td><td style="color:rgba(255,255,255,0.65)">Verified collection records, hotspot history, and impact reporting dashboard</td></tr>
+          <tr><td>Leverage technology</td><td style="color:rgba(255,255,255,0.65)">Live weather AI + GPS mapping + transparent incentive ledger</td></tr>
+          <tr><td>Support informal sector</td><td style="color:rgba(255,255,255,0.65)">Mobile-friendly, low-barrier platform for coastal community sellers</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-num">04 / 12</div>
+  </div>
+
+  <!-- SLIDE 5: 3 Roles -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="section-label">Platform Participants</div>
+      <h2>Three Roles. One Trusted Flow.</h2>
+      <div class="divider"></div>
+      <div class="grid-3">
+        <div class="role-card role-seller">
+          <div class="role-label teal">🪣 Seller</div>
+          <h3>Source of Waste</h3>
+          <p style="margin-top:8px;font-size:.85rem;color:rgba(255,255,255,0.55);">Community members who locate, collect, and list marine waste for sale. Guided by AI alerts on the live map.</p>
+          <div style="margin-top:14px;"><span class="tag live">Posts listings</span><span class="tag live">Earns Blue Credits</span><span class="tag live">GPS alerts</span></div>
+        </div>
+        <div class="role-card role-weigher">
+          <div class="role-label" style="color:#818CF8;">⚖️ Weigher</div>
+          <h3>Independent Verifier</h3>
+          <p style="margin-top:8px;font-size:.85rem;color:rgba(255,255,255,0.55);">Neutral third party who physically weighs waste and confirms its value. The trust layer between seller and buyer.</p>
+          <div style="margin-top:14px;"><span class="tag" style="background:rgba(99,102,241,0.15);color:#A5B4FC;">Verifies weight</span><span class="tag" style="background:rgba(99,102,241,0.15);color:#A5B4FC;">Sets condition</span><span class="tag" style="background:rgba(99,102,241,0.15);color:#A5B4FC;">Earns rating</span></div>
+        </div>
+        <div class="role-card role-buyer">
+          <div class="role-label green">♻️ Buyer</div>
+          <h3>Recycling Company</h3>
+          <p style="margin-top:8px;font-size:.85rem;color:rgba(255,255,255,0.55);">Recyclers who browse only Weigher-verified listings. Guaranteed weight and condition before committing to purchase.</p>
+          <div style="margin-top:14px;"><span class="tag" style="background:rgba(34,197,94,0.12);color:#86EFAC;">Verified only</span><span class="tag" style="background:rgba(34,197,94,0.12);color:#86EFAC;">Reserve &amp; inspect</span><span class="tag" style="background:rgba(34,197,94,0.12);color:#86EFAC;">Track orders</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num">05 / 12</div>
+  </div>
+
+  <!-- SLIDE 6: AI Detection -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="section-label">AI Waste Detection</div>
+      <h2>Real Weather. Real Risk. <span class="red">Live Alerts.</span></h2>
+      <div class="divider"></div>
+      <p>The AI engine monitors <strong style="color:#fff;">18 Nigerian waterways</strong> using live weather from Open-Meteo (free, no API key) and scores each for waste accumulation risk.</p>
+      <div class="grid-2">
+        <div class="card"><h3 class="teal">Live Data Inputs</h3><ul style="margin-top:10px;padding-left:18px;font-size:.85rem;color:rgba(255,255,255,0.55);line-height:2;"><li>Rainfall (mm/hour)</li><li>Wind speed (km/h)</li><li>Wind direction (compass)</li><li>Relative humidity (%)</li></ul></div>
+        <div class="card"><h3 class="teal">AI Scoring Rules</h3><ul style="margin-top:10px;padding-left:18px;font-size:.85rem;color:rgba(255,255,255,0.55);line-height:2;"><li>Rainfall &gt;10mm → +35 pts</li><li>Wind &gt;30 km/h → +25 pts</li><li>Onshore wind → +15 pts</li><li>Historical zone → +10 pts</li></ul></div>
+      </div>
+      <div class="grid-4" style="margin-top:20px;">
+        <div class="card" style="text-align:center;background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.3);"><div style="font-size:1.6rem;">🔴</div><div style="font-weight:700;color:#EF4444;margin-top:6px;">Critical</div><div style="font-size:.75rem;color:rgba(255,255,255,0.4);margin-top:4px;">Score 75–100</div></div>
+        <div class="card" style="text-align:center;background:rgba(249,115,22,0.1);border-color:rgba(249,115,22,0.3);"><div style="font-size:1.6rem;">🟠</div><div style="font-weight:700;color:#F97316;margin-top:6px;">High</div><div style="font-size:.75rem;color:rgba(255,255,255,0.4);margin-top:4px;">Score 55–74</div></div>
+        <div class="card" style="text-align:center;background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.3);"><div style="font-size:1.6rem;">🟡</div><div style="font-weight:700;color:#F59E0B;margin-top:6px;">Medium</div><div style="font-size:.75rem;color:rgba(255,255,255,0.4);margin-top:4px;">Score 35–54</div></div>
+        <div class="card" style="text-align:center;background:rgba(110,231,183,0.1);border-color:rgba(110,231,183,0.3);"><div style="font-size:1.6rem;">🟢</div><div style="font-weight:700;color:#6EE7B7;margin-top:6px;">Low</div><div style="font-size:.75rem;color:rgba(255,255,255,0.4);margin-top:4px;">Score 0–34</div></div>
+      </div>
+    </div>
+    <div class="slide-num">06 / 12</div>
+  </div>
+
+  <!-- SLIDE 7: Waterways -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="section-label">Coverage</div>
+      <h2>18 Nigerian Waterways Monitored</h2>
+      <div class="divider"></div>
+      <div class="grid-3">
+        <div class="card accent"><h3 class="teal">Lagos (6 zones)</h3><ul style="margin-top:10px;font-size:.82rem;color:rgba(255,255,255,0.5);line-height:2.1;list-style:none;"><li>🔵 Lagos Lagoon — Apapa</li><li>🔵 Lagos Lagoon — Ijora</li><li>🔵 Badagry Creek</li><li>🔵 Victoria Island — Bar Beach</li><li>🔵 Lekki Lagoon</li><li>🔵 Epe Lagoon</li></ul></div>
+        <div class="card accent"><h3 class="teal">Niger Delta (6 zones)</h3><ul style="margin-top:10px;font-size:.82rem;color:rgba(255,255,255,0.5);line-height:2.1;list-style:none;"><li>🔵 Bonny River — PHC</li><li>🔵 New Calabar River</li><li>🔵 Warri River</li><li>🔵 Escravos River Mouth</li><li>🔵 Nun River — Yenagoa</li><li>🔵 Brass River Estuary</li></ul></div>
+        <div class="card accent"><h3 class="teal">South-South / SE (6 zones)</h3><ul style="margin-top:10px;font-size:.82rem;color:rgba(255,255,255,0.5);line-height:2.1;list-style:none;"><li>🔵 Itu River — Uyo</li><li>🔵 Cross River — Calabar</li><li>🔵 Cross River — Ikom</li><li>🔵 Imo River Estuary</li><li>🔵 Ondo Coast — Ilaje</li><li>🔵 Ogun River — Abeokuta</li></ul></div>
+      </div>
+    </div>
+    <div class="slide-num">07 / 12</div>
+  </div>
+
+  <!-- SLIDE 8: Features -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="section-label">Product Features</div>
+      <h2>Everything in One Platform</h2>
+      <div class="divider"></div>
+      <div class="grid-3">
+        <div class="card"><div class="card-icon">🗺️</div><h3>Live AI Waste Map</h3><p>Pulsing red dots on Nigeria map. Real weather from Open-Meteo. One-tap listing from any alert.</p></div>
+        <div class="card"><div class="card-icon">⚖️</div><h3>Verified Trade Flow</h3><p>6-stage pipeline with auditable timeline. Weigher verification as the trust gate before any sale.</p></div>
+        <div class="card"><div class="card-icon">🔵</div><h3>Blue Credits</h3><p>5 credits per verified kg. Transparent calculation. Full transaction history per listing.</p></div>
+        <div class="card"><div class="card-icon">📊</div><h3>Impact Dashboard</h3><p>Verified kg collected, active hubs, materials transferred. Reported ≠ verified — always clear.</p></div>
+        <div class="card"><div class="card-icon">🔔</div><h3>Role-Targeted Alerts</h3><p>Weighers get listing alerts. Buyers get verification alerts. Sellers track their own pipeline.</p></div>
+        <div class="card"><div class="card-icon">📱</div><h3>Fully Responsive</h3><p>Mobile-first design. Works on all screen sizes. Dark and light mode. Accessible forms.</p></div>
+      </div>
+    </div>
+    <div class="slide-num">08 / 12</div>
+  </div>
+
+  <!-- SLIDE 9: Tech -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="section-label">Technology</div>
+      <h2>Modern, Open, Scalable</h2>
+      <div class="divider"></div>
+      <div class="grid-2">
+        <div><h3 class="teal" style="margin-bottom:16px;">Current (Prototype)</h3><div><span class="tech-pill">⚛️ React 18</span><span class="tech-pill">🔷 TypeScript 5</span><span class="tech-pill">⚡ Vite 5</span><span class="tech-pill">🎨 Tailwind CSS</span><span class="tech-pill">🗺️ Leaflet</span><span class="tech-pill">🌤️ Open-Meteo API</span><span class="tech-pill">🔑 Lucide Icons</span></div></div>
+        <div><h3 class="teal" style="margin-bottom:16px;">Planned (Production)</h3><div><span class="tech-pill">🐍 Django REST Framework</span><span class="tech-pill">🐘 PostgreSQL</span><span class="tech-pill">🤖 scikit-learn</span><span class="tech-pill">🔐 JWT Auth</span><span class="tech-pill">☁️ Cloud deployment</span><span class="tech-pill">📡 WebSockets</span></div></div>
+      </div>
+      <div class="card accent" style="margin-top:28px;"><p style="font-size:.9rem;color:rgba(255,255,255,0.7);"><strong style="color:#13C2A8;">Zero paid APIs in the prototype.</strong> The AI detection engine uses Open-Meteo — completely free, no API key. The map uses OpenStreetMap tiles. The entire prototype runs with localStorage persistence.</p></div>
+    </div>
+    <div class="slide-num">09 / 12</div>
+  </div>
+
+  <!-- SLIDE 10: Status -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="section-label">What We've Built</div>
+      <h2>Prototype Status</h2>
+      <div class="divider"></div>
+      <div class="grid-4">
+        <div class="card" style="text-align:center;"><div class="stat-val">18</div><div class="stat-label">Nigerian waterways monitored</div></div>
+        <div class="card" style="text-align:center;"><div class="stat-val">3</div><div class="stat-label">Role-specific dashboards</div></div>
+        <div class="card" style="text-align:center;"><div class="stat-val">6</div><div class="stat-label">Stage verified trade flow</div></div>
+        <div class="card" style="text-align:center;"><div class="stat-val">100%</div><div class="stat-label">Live weather — no mocks</div></div>
+      </div>
+      <div class="grid-2" style="margin-top:20px;">
+        <div class="card accent"><h3>✅ Complete</h3><ul style="margin-top:10px;font-size:.83rem;color:rgba(255,255,255,0.55);line-height:2;list-style:none;"><li>✔ AI waste detection map (live weather)</li><li>✔ Full 3-role marketplace flow</li><li>✔ Seller, Weigher, Buyer dashboards</li><li>✔ Blue Credits calculation + history</li><li>✔ Role-targeted notifications</li><li>✔ Dark/light mode + responsive design</li><li>✔ GPS pin-drop waste reporting</li></ul></div>
+        <div class="card amber"><h3>🔜 Next Phase</h3><ul style="margin-top:10px;font-size:.83rem;color:rgba(255,255,255,0.55);line-height:2;list-style:none;"><li>→ Django backend + PostgreSQL</li><li>→ Real multi-user accounts</li><li>→ Mobile app (PWA / React Native)</li><li>→ ML model trained on real data</li><li>→ Payment gateway (Flutterwave)</li><li>→ Government reporting exports</li></ul></div>
+      </div>
+    </div>
+    <div class="slide-num">10 / 12</div>
+  </div>
+
+  <!-- SLIDE 11: Impact -->
+  <div class="slide">
+    <div class="slide-inner">
+      <div class="section-label">Vision &amp; Impact</div>
+      <h2>From Waste Problem to Blue Economy Asset</h2>
+      <div class="divider"></div>
+      <div class="grid-3">
+        <div class="card"><div class="card-icon">🌊</div><h3>Environmental</h3><p>Measurably reduce marine plastic and water hyacinth across Nigeria's highest-risk waterways through data-driven collection.</p></div>
+        <div class="card"><div class="card-icon">👥</div><h3>Community</h3><p>Create sustainable income for coastal communities through a transparent, incentivised marketplace.</p></div>
+        <div class="card"><div class="card-icon">🏭</div><h3>Industry</h3><p>Give recycling companies a reliable, verified supply chain for recovered marine materials.</p></div>
+        <div class="card"><div class="card-icon">🏛️</div><h3>Governance</h3><p>Provide NIMASA and state agencies with real-time verified data on waste collection across Nigerian waterways.</p></div>
+        <div class="card"><div class="card-icon">📈</div><h3>Scale</h3><p>Platform model is replicable across all Nigerian coastal states and adaptable to other West African zones.</p></div>
+        <div class="card"><div class="card-icon">🤖</div><h3>AI Evolution</h3><p>Every verified collection record trains the AI. The more waste is collected, the smarter the predictions become.</p></div>
+      </div>
+    </div>
+    <div class="slide-num">11 / 12</div>
+  </div>
+
+  <!-- SLIDE 12: CTA -->
+  <div class="slide cta">
+    <div class="slide-inner" style="text-align:center;">
+      <div class="logo" style="justify-content:center;margin-bottom:32px;">
+        <div class="logo-icon">🌊</div>
+        <span class="logo-text">Waste<span class="teal">Flow</span></span>
+      </div>
+      <h2>Help Communities Turn Marine<br/>Waste Into <span class="teal">Community Value</span></h2>
+      <div class="divider" style="margin:24px auto;"></div>
+      <p style="max-width:560px;margin:0 auto;font-size:1rem;line-height:1.75;">AI-guided detection. Verified collection. Transparent incentives.<br/>A traceable path from marine waste to productive reuse.</p>
+      <div class="cta-btns">
+        <div class="btn-primary">🚀 View Live Demo</div>
+        <div class="btn-outline">📄 Read Full README</div>
+      </div>
+      <p style="margin-top:40px;font-size:.8rem;color:rgba(255,255,255,0.2);">NIMASA-BEAP Hackathon · Track 6 — Blue Circular Economy</p>
+    </div>
+    <div class="slide-num">12 / 12</div>
+  </div>
+
+</div>
+</body>
+</html>

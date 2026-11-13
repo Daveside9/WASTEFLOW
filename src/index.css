@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Theme variables ──────────────────────────────────────────────────────── */
+
+:root,
+[data-theme="dark"] {
+  --bg-app:        #071C2C;
+  --bg-sidebar:    #040F18;
+  --bg-card:       #0B2233;
+  --bg-hover:      rgba(255,255,255,0.05);
+  --bg-input:      rgba(255,255,255,0.05);
+  --text-primary:  #ffffff;
+  --text-secondary: rgba(255,255,255,0.4);
+  --text-muted:    rgba(255,255,255,0.25);
+  --border-color:  rgba(255,255,255,0.06);
+  --border-stronger: rgba(255,255,255,0.1);
+}
+
+[data-theme="light"] {
+  --bg-app:        #F1F5F9;
+  --bg-sidebar:    #FFFFFF;
+  --bg-card:       #FFFFFF;
+  --bg-hover:      #F4F7FA;
+  --bg-input:      #F4F7FA;
+  --text-primary:  #123B52;
+  --text-secondary: #64748B;
+  --text-muted:    #94A3B8;
+  --border-color:  #E2EBF0;
+  --border-stronger: #CBD5E1;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+}
+
+@layer utilities {
+  /* ── Theme-aware utility classes ──────────────────────────────────────── */
+  .th-bg-card    { background-color: var(--bg-card); }
+  .th-bg-sidebar { background-color: var(--bg-sidebar); }
+  .th-bg-app     { background-color: var(--bg-app); }
+  .th-text       { color: var(--text-primary); }
+  .th-text-sec   { color: var(--text-secondary); }
+  .th-border     { border-color: var(--border-color); }
+  .th-hover-bg:hover { background-color: var(--bg-hover); }
+
+  /* ── Existing utilities ───────────────────────────────────────────────── */
+  .animate-wave-1 { animation: wave 9s linear infinite; }
+  .animate-wave-2 { animation: wave 14s linear infinite reverse; }
+  .animate-wave-3 { animation: wave 19s linear infinite; }
+
+  .glass {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .glass-nav {
+    background: rgba(10, 30, 44, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  /* pill label above headings */
+  .section-pill {
+    @apply inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-teal mb-4;
+  }
+
+  .section-pill-light {
+    @apply inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-teal-light mb-4;
+  }
+
+  .section-pill::before,
+  .section-pill-light::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+  }
+}
+
+@keyframes wave {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(60px) scale(0.6); opacity: 0; }
+  15%  { opacity: 0.7; }
+  85%  { opacity: 0.3; }
+  100% { transform: translateY(-60px) scale(1.1); opacity: 0; }
+}
+
+.particle { animation: floatUp linear infinite; }
+
+@keyframes pulseRing {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.3; transform: scale(0.65); }
+}
+.animate-pulse-dot { animation: pulseRing 2.2s ease-in-out infinite; }
